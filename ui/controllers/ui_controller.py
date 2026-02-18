@@ -2,7 +2,7 @@ import os
 from ui.view import draw_menu
 from ui.view import ask_filters
 from api.controllers import get_dates
-from ui.view import show_dates
+from ui.controllers import pag_controller
 from dotenv import load_dotenv # type: ignore
 
 def start_ui():
@@ -16,7 +16,8 @@ def start_ui():
             limit = int(os.getenv("DEFAULT_LIMIT"))
 
         table  = get_dates(limit, state)
-        show_dates(table)
+
+        pag_controller(limit = limit, table = table)
     elif option == "2":
         print("Opcion 2")        
     else:
