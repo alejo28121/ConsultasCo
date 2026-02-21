@@ -1,4 +1,5 @@
 import os
+import sys
 from ui.view import draw_menu
 from ui.view import ask_filters
 from api.controllers import get_dates
@@ -19,6 +20,6 @@ def start_ui():
 
         pag_controller(limit = limit, table = table)
     elif option == "2":
-        print("Opcion 2")        
+        sys.exit()
     else:
         print("Opcion incorrecta.")    

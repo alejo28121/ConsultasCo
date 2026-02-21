@@ -2,6 +2,8 @@ import os
 import pandas as pd # type: ignore
 from sodapy import Socrata # type: ignore
 from dotenv import load_dotenv # type: ignore
+import time 
+import sys
 
 load_dotenv()
 
@@ -11,10 +13,12 @@ def get_dates(api_limit, state):
     api_token = os.getenv("APP_TOKEN")
 
     client = Socrata(api_url, api_token, timeout = 15);
-
     results = client.get(api_source, limit = api_limit, where = f"departamento_nom='{state}'")
-
-    results_df = pd.DataFrame.from_records(results)
-    df_subset = results_df[["ciudad_municipio_nom", "departamento_nom", "edad", "sexo", "estado"]]
-    
-    return df_subset
+    if len(results) != 0:
+        results_df = pd.DataFrame.from_records(results)
+        df_subset = results_df[["ciudad_municipio_nom", "departamento_nom", "edad", "sexo", "estado"]]
+        return df_subset
+    else:
+        print("\nNo se han encontrado datos para el departamento seleccionado.")
+        time.sleep(2)
+        sys.exit()

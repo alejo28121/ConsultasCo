@@ -1,5 +1,5 @@
 def ask_filters():
-    state = input("Ingrese el departamento: ")
+    state = input("\nIngrese el departamento: ")
 
     while True:
         dates_amount = input("Ingrese la cantidad de datos: ")

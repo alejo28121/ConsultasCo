@@ -1,5 +1,13 @@
-import keyboard
+import requests
 
-print("Presiona cualquier tecla...")
-event = keyboard.read_event()  # espera una tecla
-print("Tecla presionada:", event.name)
+url = "https://www.datos.gov.co/resource/gt2j-8ykr.json"
+
+params = {
+    "$limit": 1,
+    "$where": "departamento_nom='RISARALDA'"
+}
+
+r = requests.get(url, params=params, timeout=30)
+
+print("Status:", r.status_code)
+print("Data:", r.json())
